@@ -19,5 +19,13 @@ const pool = new Pool({
   connectionString: process.env.POSTGRES_URI,
 });
 
+// Test PostgreSQL connection
+pool.connect()
+  .then(client => {
+    console.log("PostgreSQL connected...");
+    client.release(); // Release the client back to the pool
+  })
+  .catch(error => console.error("PostgreSQL connection error:", error));
+
 //export { mongoose, pool };
 module.exports = { mongoose, pool };
